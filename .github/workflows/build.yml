@@ -32,6 +32,7 @@ jobs:
       - name: Build APK with Gradle
         run: |
           cd Apk/android
+          chmod +x gradlew
           ./gradlew assembleDebug
 
       - name: Upload APK
