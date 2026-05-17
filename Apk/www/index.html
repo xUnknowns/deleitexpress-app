@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DeleitExpress – Dulces a Domicilio en Chile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand:        #E8252A;
+      --brand-dark:   #b81a1e;
+      --brand-light:  #fff1f1;
+      --accent:       #FF8C00;
+      --accent-light: #fff7ed;
+      --gold:         #f5c518;
+      --text-primary: #1a1a1a;
+      --text-secondary:#555;
+      --text-muted:   #999;
+      --surface:      #ffffff;
+      --surface-2:    #f7f7f7;
+      --border:       #e8e8e8;
+      --shadow-sm:    0 1px 4px rgba(0,0,0,.08);
+      --shadow-md:    0 4px 18px rgba(0,0,0,.12);
+      --shadow-lg:    0 10px 40px rgba(0,0,0,.15);
+      --radius-sm:    6px;
+      --radius-md:    12px;
+      --radius-lg:    20px;
+      --font-display: 'Playfair Display', serif;
+      --font-body:    'Nunito', sans-serif;
+      --transition:   .22s cubic-bezier(.4,0,.2,1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); color: var(--text-primary); background: var(--surface-2); -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* TOP BAR */
+    .topbar { background: var(--brand-dark); color: #fff; font-size: .78rem; padding: .35rem 0; }
+    .topbar-inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .topbar a { color: #ffd6d6; }
+    .topbar a:hover { color: #fff; }
+    .topbar-links { display: flex; gap: 1.2rem; }
+
+    /* HEADER */
+    header { background: var(--brand); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(200,0,0,.25); }
+    .header-inner { max-width: 1280px; margin: 0 auto; padding: .85rem 1.5rem; display: flex; align-items: center; gap: 1.5rem; }
+    .logo { display: flex; align-items: center; gap: .55rem; white-space: nowrap; flex-shrink: 0; }
+    .logo-icon { width: 42px; height: 42px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; box-shadow: 0 2px 8px rgba(0,0,0,.2); }
+    .logo-text { color: #fff; line-height: 1.1; }
+    .logo-text strong { font-family: var(--font-display); font-size: 1.35rem; display: block; letter-spacing: -.5px; }
+    .logo-text span { font-size: .68rem; opacity: .85; letter-spacing: .5px; text-transform: uppercase; }
+    .search-bar { flex: 1; display: flex; max-width: 620px; border-radius: var(--radius-sm); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.15); }
+    .search-bar input { flex: 1; border: none; outline: none; padding: .65rem 1rem; font-family: var(--font-body); font-size: .92rem; color: var(--text-primary); }
+    .search-bar button { background: var(--gold); border: none; cursor: pointer; padding: 0 1.1rem; font-size: 1.1rem; transition: background var(--transition); }
+    .search-bar button:hover { background: #e0b015; }
+    .header-actions { display: flex; align-items: center; gap: 1.2rem; margin-left: auto; color: #fff; }
+    .header-actions a { display: flex; flex-direction: column; align-items: center; gap: .15rem; font-size: .7rem; color: #ffe0e0; transition: color var(--transition); }
+    .header-actions a:hover { color: #fff; }
+    .header-actions a .icon { font-size: 1.3rem; }
+    .cart-btn { background: var(--gold); color: #1a1a1a !important; border-radius: var(--radius-sm); padding: .5rem .9rem; font-weight: 700; display: flex !important; align-items: center; gap: .4rem; font-size: .82rem !important; flex-direction: row !important; box-shadow: 0 2px 8px rgba(0,0,0,.15); transition: background var(--transition); }
+    .cart-btn:hover { background: #e0b015 !important; }
+    .cart-badge { background: var(--brand); color: #fff; border-radius: 50%; width: 18px; height: 18px; font-size: .7rem; display: flex; align-items: center; justify-content: center; font-weight: 800; }
+
+    /* NAV */
+    nav.category-nav { background: #fff; border-bottom: 2px solid var(--border); box-shadow: var(--shadow-sm); }
+    .nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; display: flex; overflow-x: auto; scrollbar-width: none; }
+    .nav-inner::-webkit-scrollbar { display: none; }
+    .nav-item { padding: .7rem 1.1rem; font-size: .85rem; font-weight: 700; color: var(--text-secondary); white-space: nowrap; border-bottom: 3px solid transparent; cursor: pointer; transition: all var(--transition); }
+    .nav-item:hover, .nav-item.active { color: var(--brand); border-bottom-color: var(--brand); }
+
+    /* HERO */
+    .hero { max-width: 1280px; margin: 1.5rem auto 0; padding: 0 1.5rem; }
+    .hero-banner { border-radius: var(--radius-lg); background: linear-gradient(135deg, #1a1a2e 0%, #E8252A 50%, #FF8C00 100%); padding: 3rem 3.5rem; display: flex; align-items: center; justify-content: space-between; overflow: hidden; position: relative; min-height: 220px; }
+    .hero-banner::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/svg%3E"); }
+    .hero-content { position: relative; z-index: 1; max-width: 520px; }
+    .hero-tag { display: inline-block; background: var(--gold); color: #1a1a1a; font-size: .72rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; padding: .25rem .7rem; border-radius: 100px; margin-bottom: .9rem; }
+    .hero-title { font-family: var(--font-display); font-size: 2.5rem; color: #fff; line-height: 1.15; margin-bottom: .7rem; }
+    .hero-title span { color: var(--gold); }
+    .hero-subtitle { color: rgba(255,255,255,.82); font-size: .95rem; line-height: 1.6; margin-bottom: 1.4rem; }
+    .hero-cta { display: inline-flex; align-items: center; gap: .5rem; background: #fff; color: var(--brand); font-weight: 800; font-size: .9rem; padding: .7rem 1.6rem; border-radius: 100px; box-shadow: 0 4px 16px rgba(0,0,0,.2); transition: all var(--transition); }
+    .hero-cta:hover { background: var(--gold); color: #1a1a1a; transform: translateY(-2px); }
+    .hero-emojis { position: relative; z-index: 1; font-size: 5rem; line-height: 1; display: flex; flex-direction: column; gap: .3rem; opacity: .9; }
+
+    /* TRUST */
+    .trust-strip { max-width: 1280px; margin: 1.2rem auto; padding: 0 1.5rem; display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; }
+    .trust-card { background: #fff; border-radius: var(--radius-md); border: 1px solid var(--border); padding: 1rem 1.2rem; display: flex; align-items: center; gap: .85rem; box-shadow: var(--shadow-sm); }
+    .trust-icon { font-size: 1.8rem; flex-shrink: 0; }
+    .trust-card h4 { font-size: .85rem; font-weight: 800; margin-bottom: .1rem; }
+    .trust-card p { font-size: .75rem; color: var(--text-secondary); }
+
+    /* MAIN */
+    .main-layout { max-width: 1280px; margin: 0 auto; padding: 1.5rem 1.5rem 3rem; display: grid; grid-template-columns: 240px 1fr; gap: 1.5rem; }
+
+    /* SIDEBAR */
+    .sidebar { display: flex; flex-direction: column; gap: 1rem; }
+    .sidebar-card { background: #fff; border-radius: var(--radius-md); border: 1px solid var(--border); padding: 1.2rem 1.3rem; box-shadow: var(--shadow-sm); }
+    .sidebar-card h3 { font-size: .82rem; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; color: var(--text-muted); margin-bottom: .9rem; padding-bottom: .55rem; border-bottom: 2px solid var(--border); }
+    .filter-list { display: flex; flex-direction: column; gap: .5rem; }
+    .filter-item { display: flex; align-items: center; gap: .5rem; font-size: .875rem; cursor: pointer; padding: .3rem 0; color: var(--text-secondary); transition: color var(--transition); }
+    .filter-item input { accent-color: var(--brand); }
+    .filter-item:hover { color: var(--brand); }
+    .filter-item span.count { margin-left: auto; font-size: .75rem; color: var(--text-muted); background: var(--surface-2); padding: .1rem .4rem; border-radius: 100px; }
+    .price-range { display: flex; flex-direction: column; gap: .6rem; }
+    .price-range input[type=range] { width: 100%; accent-color: var(--brand); }
+    .price-row { display: flex; justify-content: space-between; font-size: .8rem; color: var(--text-muted); }
+    .apply-filter { width: 100%; margin-top: .6rem; padding: .55rem; background: var(--brand); color: #fff; border: none; border-radius: var(--radius-sm); font-family: var(--font-body); font-weight: 700; font-size: .85rem; cursor: pointer; transition: background var(--transition); }
+    .apply-filter:hover { background: var(--brand-dark); }
+    .policy-box { background: var(--brand-light); border: 1px solid #ffc7c8; border-radius: var(--radius-md); padding: 1rem; }
+    .policy-box h3 { font-size: .82rem; font-weight: 800; color: var(--brand); margin-bottom: .5rem; text-transform: none; letter-spacing: 0; border: none; padding: 0; }
+    .policy-box p { font-size: .78rem; color: var(--text-secondary); line-height: 1.6; }
+    .policy-link { color: var(--brand); font-weight: 700; font-size: .78rem; cursor: pointer; text-decoration: underline; margin-top: .4rem; display: inline-block; background: none; border: none; font-family: var(--font-body); padding: 0; }
+    .policy-link:hover { color: var(--brand-dark); }
+    .contact-card { background: linear-gradient(135deg, var(--brand) 0%, #b81a1e 100%); border-radius: var(--radius-md); padding: 1.3rem; color: #fff; }
+    .contact-card h3 { font-size: .9rem; font-weight: 800; margin-bottom: .8rem; color: #fff; border: none; padding: 0; text-transform: none; letter-spacing: 0; }
+    .contact-row { display: flex; align-items: center; gap: .5rem; font-size: .8rem; margin-bottom: .45rem; }
+    .contact-row a { color: #ffd6d6; word-break: break-all; }
+    .contact-row a:hover { color: #fff; }
+    .whatsapp-btn { display: flex; align-items: center; justify-content: center; gap: .4rem; margin-top: .9rem; background: #25D366; color: #fff; border-radius: var(--radius-sm); padding: .6rem; font-size: .82rem; font-weight: 800; transition: background var(--transition); }
+    .whatsapp-btn:hover { background: #1da851; }
+
+    /* PRODUCTS */
+    .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+    .section-header h2 { font-family: var(--font-display); font-size: 1.45rem; font-weight: 700; }
+    .section-header h2 span { color: var(--brand); }
+    .sort-bar { display: flex; align-items: center; gap: .6rem; font-size: .82rem; color: var(--text-secondary); }
+    .sort-bar select { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: .3rem .55rem; font-family: var(--font-body); font-size: .82rem; cursor: pointer; outline: none; background: #fff; }
+    .results-count { font-size: .82rem; color: var(--text-muted); }
+    .products-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+
+    /* CARD */
+    .product-card { background: #fff; border-radius: var(--radius-md); border: 1px solid var(--border); overflow: hidden; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; transition: box-shadow var(--transition), transform var(--transition); position: relative; }
+    .product-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+    .product-badge { position: absolute; top: .7rem; left: .7rem; background: var(--brand); color: #fff; font-size: .68rem; font-weight: 800; letter-spacing: .4px; padding: .2rem .55rem; border-radius: 100px; text-transform: uppercase; z-index: 2; }
+    .product-badge.popular { background: #7b2ff7; }
+    .product-badge.local { background: #1a7f4b; }
+    .product-wishlist { position: absolute; top: .7rem; right: .7rem; background: rgba(255,255,255,.92); border: none; cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; box-shadow: 0 1px 6px rgba(0,0,0,.12); z-index: 2; transition: all var(--transition); }
+    .product-wishlist:hover { background: #fff; transform: scale(1.1); }
+    .product-img-wrap { background: var(--surface-2); height: 195px; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 1.2rem; }
+    .product-img-wrap img { max-height: 165px; width: auto; object-fit: contain; transition: transform .35s ease; }
+    .product-card:hover .product-img-wrap img { transform: scale(1.06); }
+    .product-info { padding: 1rem; flex: 1; display: flex; flex-direction: column; gap: .38rem; }
+    .product-brand { font-size: .7rem; font-weight: 700; color: var(--brand); text-transform: uppercase; letter-spacing: .5px; }
+    .product-name { font-size: .9rem; font-weight: 800; color: var(--text-primary); line-height: 1.3; }
+    .product-desc { font-size: .78rem; color: var(--text-secondary); line-height: 1.55; }
+    .product-weight { font-size: .72rem; color: var(--text-muted); font-weight: 600; }
+    .product-rating { display: flex; align-items: center; gap: .3rem; font-size: .78rem; }
+    .stars { color: var(--gold); }
+    .rating-count { color: var(--text-muted); }
+    .product-price-row { display: flex; align-items: baseline; gap: .5rem; margin-top: auto; padding-top: .4rem; }
+    .product-price { font-size: 1.2rem; font-weight: 900; color: var(--brand); }
+    .product-price-old { font-size: .8rem; color: var(--text-muted); text-decoration: line-through; }
+    .product-discount { font-size: .72rem; font-weight: 800; color: #1a7f4b; background: #e6f9ef; padding: .1rem .4rem; border-radius: 100px; }
+    .product-actions { padding: 0 1rem 1rem; display: flex; gap: .5rem; }
+    .btn-add-cart { flex: 1; background: var(--brand); color: #fff; border: none; border-radius: var(--radius-sm); padding: .6rem; font-family: var(--font-body); font-size: .83rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: .35rem; transition: background var(--transition); }
+    .btn-add-cart:hover { background: var(--brand-dark); }
+    .btn-buy-now { background: var(--accent-light); color: var(--accent); border: 1.5px solid var(--accent); border-radius: var(--radius-sm); padding: .6rem .8rem; font-family: var(--font-body); font-size: .83rem; font-weight: 700; cursor: pointer; white-space: nowrap; transition: all var(--transition); }
+    .btn-buy-now:hover { background: var(--accent); color: #fff; }
+
+    /* DELIVERY */
+    .delivery-section { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem 2rem; }
+    .delivery-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+    .delivery-card { background: #fff; border-radius: var(--radius-md); border: 1px solid var(--border); padding: 1.4rem; display: flex; gap: 1rem; align-items: flex-start; box-shadow: var(--shadow-sm); }
+    .delivery-card .di { font-size: 2.2rem; }
+    .delivery-card h4 { font-weight: 800; font-size: .9rem; margin-bottom: .25rem; }
+    .delivery-card p { font-size: .78rem; color: var(--text-secondary); line-height: 1.5; }
+    .inline-policy-link { color: var(--brand); font-weight: 700; font-size: .78rem; cursor: pointer; text-decoration: underline; margin-top: .4rem; display: inline-block; background: none; border: none; font-family: var(--font-body); padding: 0; }
+    .inline-policy-link:hover { color: var(--brand-dark); }
+
+    /* NEWSLETTER */
+    .newsletter { background: linear-gradient(135deg, #1a1a2e 0%, #2d1b69 100%); padding: 3rem 1.5rem; text-align: center; }
+    .newsletter-inner { max-width: 520px; margin: 0 auto; }
+    .newsletter h2 { font-family: var(--font-display); font-size: 1.8rem; color: #fff; margin-bottom: .5rem; }
+    .newsletter p { color: rgba(255,255,255,.7); margin-bottom: 1.3rem; font-size: .9rem; }
+    .newsletter-form { display: flex; gap: .5rem; }
+    .newsletter-form input { flex: 1; padding: .7rem 1rem; border: none; border-radius: var(--radius-sm); font-family: var(--font-body); font-size: .9rem; outline: none; }
+    .newsletter-form button { background: var(--gold); color: #1a1a1a; border: none; padding: .7rem 1.4rem; border-radius: var(--radius-sm); font-family: var(--font-body); font-weight: 800; cursor: pointer; font-size: .9rem; transition: background var(--transition); }
+    .newsletter-form button:hover { background: #e0b015; }
+
+    /* FOOTER */
+    footer { background: #111; color: rgba(255,255,255,.7); padding: 2.5rem 1.5rem 1.2rem; }
+    .footer-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; margin-bottom: 1.8rem; }
+    .footer-col h4 { font-size: .8rem; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: .5px; margin-bottom: .8rem; }
+    .footer-col ul { display: flex; flex-direction: column; gap: .4rem; }
+    .footer-col li { font-size: .8rem; }
+    .footer-col a { color: rgba(255,255,255,.6); transition: color var(--transition); }
+    .footer-col a:hover { color: #fff; }
+    .footer-bottom { max-width: 1280px; margin: 0 auto; padding-top: 1.2rem; border-top: 1px solid rgba(255,255,255,.1); display: flex; justify-content: space-between; align-items: center; font-size: .75rem; flex-wrap: wrap; gap: .5rem; }
+    .footer-badges { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .badge { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); color: rgba(255,255,255,.6); padding: .2rem .6rem; border-radius: 100px; font-size: .7rem; }
+
+    /* CART */
+    .cart-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 1000; opacity: 0; pointer-events: none; transition: opacity var(--transition); }
+    .cart-overlay.open { opacity: 1; pointer-events: all; }
+    .cart-drawer { position: fixed; top: 0; right: -420px; width: 420px; max-width: 95vw; height: 100vh; background: #fff; z-index: 1001; box-shadow: -10px 0 40px rgba(0,0,0,.2); display: flex; flex-direction: column; transition: right .3s cubic-bezier(.4,0,.2,1); }
+    .cart-drawer.open { right: 0; }
+    .cart-header { padding: 1.2rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+    .cart-header h3 { font-family: var(--font-display); font-size: 1.2rem; }
+    .cart-close { background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--text-muted); transition: color var(--transition); }
+    .cart-close:hover { color: var(--brand); }
+    .cart-body { flex: 1; overflow-y: auto; padding: 1rem 1.5rem; }
+    .cart-empty { text-align: center; padding: 3rem 0; color: var(--text-muted); }
+    .cart-empty .ei { font-size: 3.5rem; margin-bottom: .8rem; }
+    .cart-item { display: flex; gap: .8rem; padding: .9rem 0; border-bottom: 1px solid var(--border); }
+    .cart-item img { width: 68px; height: 68px; object-fit: contain; background: var(--surface-2); border-radius: var(--radius-sm); padding: .3rem; flex-shrink: 0; }
+    .cart-item-info { flex: 1; min-width: 0; }
+    .cart-item-name { font-size: .85rem; font-weight: 700; margin-bottom: .2rem; }
+    .cart-item-price { font-size: .9rem; font-weight: 900; color: var(--brand); }
+    .cart-item-qty { display: flex; align-items: center; gap: .4rem; margin-top: .4rem; }
+    .qty-btn { width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--border); background: none; cursor: pointer; font-size: .95rem; display: flex; align-items: center; justify-content: center; transition: all var(--transition); }
+    .qty-btn:hover { border-color: var(--brand); color: var(--brand); }
+    .qty-val { font-size: .85rem; font-weight: 700; min-width: 20px; text-align: center; }
+    .cart-remove { background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: .78rem; flex-shrink: 0; align-self: flex-start; margin-top: .1rem; transition: color var(--transition); }
+    .cart-remove:hover { color: var(--brand); }
+    .cart-footer { padding: 1.2rem 1.5rem; border-top: 2px solid var(--border); background: var(--surface-2); }
+    .cart-coupon { display: flex; gap: .5rem; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+    .cart-coupon input { flex: 1; padding: .55rem .8rem; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: .82rem; outline: none; }
+    .cart-coupon input:focus { border-color: var(--brand); }
+    .btn-coupon { background: var(--text-primary); color: #fff; border: none; padding: 0 1rem; border-radius: var(--radius-sm); font-size: .75rem; font-weight: 700; cursor: pointer; transition: background var(--transition); }
+    .btn-coupon:hover { background: #000; }
+    .cart-discount-row { display: flex; justify-content: space-between; font-size: .9rem; color: #1a7f4b; margin-bottom: .5rem; font-weight: 700; }
+    .cart-total { display: flex; justify-content: space-between; font-weight: 800; font-size: 1.1rem; margin-bottom: 1rem; }
+    .cart-total span:last-child { color: var(--brand); }
+    .btn-checkout { width: 100%; background: var(--brand); color: #fff; border: none; padding: .85rem; border-radius: var(--radius-md); font-family: var(--font-body); font-size: .95rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: .5rem; transition: background var(--transition); }
+    .btn-checkout:hover { background: var(--brand-dark); }
+
+    /* MODAL */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 1rem; opacity: 0; pointer-events: none; transition: opacity .25s; }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal { background: #fff; border-radius: var(--radius-lg); max-width: 640px; width: 100%; max-height: 88vh; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,.25); transform: translateY(30px); transition: transform .3s cubic-bezier(.4,0,.2,1); overflow: hidden; }
+    .modal-overlay.open .modal { transform: translateY(0); }
+    .modal-head { background: var(--brand); color: #fff; padding: 1.4rem 1.6rem; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+    .modal-head h2 { font-family: var(--font-display); font-size: 1.3rem; }
+    .modal-close { background: rgba(255,255,255,.2); border: none; color: #fff; font-size: 1.2rem; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background var(--transition); }
+    .modal-close:hover { background: rgba(255,255,255,.35); }
+    .modal-body { overflow-y: auto; padding: 1.6rem; }
+    .modal-section { margin-bottom: 1.5rem; }
+    .modal-section:last-child { margin-bottom: 0; }
+    .modal-section h3 { font-size: .95rem; font-weight: 800; color: var(--brand); margin-bottom: .6rem; }
+    .modal-section p { font-size: .85rem; color: var(--text-secondary); line-height: 1.65; }
+    .modal-list { display: flex; flex-direction: column; gap: .45rem; margin-top: .4rem; }
+    .modal-list li { display: flex; align-items: flex-start; gap: .5rem; font-size: .85rem; color: var(--text-secondary); line-height: 1.6; }
+    .modal-list li::before { content: '✓'; color: #1a7f4b; font-weight: 800; flex-shrink: 0; }
+    .modal-divider { height: 1px; background: var(--border); margin: 1.2rem 0; }
+    .modal-highlight { background: var(--brand-light); border: 1px solid #ffc7c8; border-radius: var(--radius-sm); padding: .9rem 1rem; font-size: .83rem; color: var(--brand-dark); font-weight: 600; line-height: 1.65; }
+
+    /* TOAST */
+    .toast { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(100px); background: #1a7f4b; color: #fff; padding: .7rem 1.4rem; border-radius: 100px; font-size: .88rem; font-weight: 700; box-shadow: 0 4px 20px rgba(0,0,0,.2); z-index: 3000; transition: transform .3s cubic-bezier(.4,0,.2,1); white-space: nowrap; }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* REVIEW MODAL SPECIFIC */
+    .star-rating { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 0.5rem; margin-bottom: 1rem; }
+    .star-rating input { display: none; }
+    .star-rating label { font-size: 2rem; color: #ddd; cursor: pointer; transition: color 0.2s; }
+    .star-rating input:checked ~ label,
+    .star-rating label:hover,
+    .star-rating label:hover ~ label { color: var(--gold); }
+    .review-textarea { width: 100%; border: 1.5px solid var(--border); border-radius: var(--radius-sm); padding: 1rem; font-family: var(--font-body); font-size: 0.9rem; min-height: 100px; margin-bottom: 1rem; outline: none; resize: vertical; }
+    .review-textarea:focus { border-color: var(--brand); }
+    .btn-submit-review { width: 100%; background: var(--brand); color: #fff; border: none; padding: 0.8rem; border-radius: var(--radius-sm); font-weight: 800; cursor: pointer; transition: background var(--transition); }
+    .btn-submit-review:hover { background: var(--brand-dark); }
+    .product-stats { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; font-size: .75rem; color: var(--text-muted); margin-top: 0.2rem; }
+    .btn-review-open { background: none; border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px; font-size: 0.7rem; font-weight: 700; cursor: pointer; color: var(--text-secondary); transition: all 0.2s; }
+    .btn-review-open:hover { background: var(--surface-2); border-color: var(--brand); color: var(--brand); }
+    .likes-count { display: flex; align-items: center; gap: 2px; color: #e8252a; font-weight: 700; }
+
+    /* NEW PRODUCT TAGS */
+    .product-tag { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; vertical-align: middle; }
+    .tag-recent { background: #e8252a; color: #fff; animation: pulse-red 2s infinite; position: absolute; top: 10px; left: 10px; z-index: 10; }
+    .tag-new { background: #1a5fa8; color: #fff; position: absolute; top: 10px; left: 10px; z-index: 10; }
+    .tag-top { background: var(--gold); color: #000; margin-left: 5px; }
+
+    @keyframes pulse-red {
+      0% { box-shadow: 0 0 0 0 rgba(232, 37, 42, 0.4); }
+      70% { box-shadow: 0 0 0 6px rgba(232, 37, 42, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(232, 37, 42, 0); }
+    }
+
+    /* RESPONSIVE IMPROVEMENTS */
+    @media (max-width: 1024px) { 
+      .main-layout { grid-template-columns: 200px 1fr; } 
+      .products-grid { grid-template-columns: repeat(2,1fr); } 
+      .trust-strip { grid-template-columns: repeat(2,1fr); } 
+      .footer-inner { grid-template-columns: 1fr 1fr; } 
+    }
+    
+    @media (max-width: 768px) { 
+      .main-layout { grid-template-columns: 1fr; padding: 1rem; } 
+      .sidebar { display: none; } 
+      .delivery-grid { grid-template-columns: 1fr; } 
+      .hero-banner { padding: 2.5rem 1.5rem; text-align: center; } 
+      .hero-title { font-size: 2rem; } 
+      .hero-emojis { display: none; } 
+      .header-actions a:not(.cart-btn), .header-actions button:not(.cart-btn) { display: none; } 
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; text-align: center; } 
+      .footer-col { display: flex; flex-direction: column; align-items: center; }
+      .newsletter-form { flex-direction: column; width: 100%; } 
+      .newsletter-form input { width: 100%; }
+      .category-nav { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .nav-inner { padding: 0.5rem 1rem; width: max-content; }
+      .hero-actions { justify-content: center; }
+      .products-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .topbar-inner { flex-direction: column; gap: 0.5rem; text-align: center; font-size: 0.75rem; }
+      .header-inner { padding: 0.8rem 1rem; }
+      .logo-text { display: none; } /* Ocultar texto del logo en móviles muy pequeños */
+      .search-bar { flex: 1; margin: 0 1rem; }
+    }
+
+    @media (max-width: 480px) { 
+      .hero-title { font-size: 1.8rem; }
+      .products-grid { grid-template-columns: 1fr; }
+      .modal { width: 95%; margin: 10px; padding: 1.5rem; }
+      .btn-hero-primary, .btn-hero-secondary { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <span>🚚 Despacho a domicilio en Santiago — <strong>+56 9 5981 5468</strong> / <strong>+56 9 2060 9832</strong></span>
+    <div class="topbar-links">
+      <a href="#" onclick="openModal(event)">Política de despacho</a>
+      <a href="mailto:dulcesdelivery0@gmail.com">dulcesdelivery0@gmail.com</a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon">🍬</div>
+      <div class="logo-text">
+        <strong>DeleitExpress</strong>
+        <span>Dulces a domicilio</span>
+      </div>
+    </div>
+    <div class="search-bar">
+      <input type="text" placeholder="Buscar dulces, chocolates, snacks…" id="searchInput" />
+      <button onclick="filterProducts()">🔍</button>
+    </div>
+    <div class="header-actions">
+      <a href="#contacto"><span class="icon">📞</span><span>Contacto</span></a>
+      <a href="#" class="cart-btn" onclick="openCart(event)">🛒 Mi Carrito <span class="cart-badge" id="cartBadge">0</span></a>
+      <button onclick="showToast('🚀 El sistema de registro estará disponible próximamente.','#1a5fa8')" class="cart-btn" style="background: var(--surface); color: var(--text-primary) !important; border: 1.5px solid var(--border);">👤 Registrarse</button>
+    </div>
+  </div>
+</header>
+
+<!-- CATEGORY NAV -->
+<nav class="category-nav">
+  <div class="nav-inner">
+    <div class="nav-item active" onclick="filterCat('todos',this)">🍬 Todos los productos</div>
+    <div class="nav-item" onclick="filterCat('chocolate',this)">🍫 Chocolates</div>
+    <div class="nav-item" onclick="filterCat('galleta',this)">🍪 Galletas & Cookies</div>
+    <div class="nav-item" onclick="filterCat('snack',this)">🧁 Snacks & Pasteles</div>
+    <div class="nav-item" onclick="filterCat('importado',this)">🌎 Importados</div>
+    <div class="nav-item" onclick="filterCat('local',this)">🇨🇱 Marcas Locales</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-banner">
+    <div class="hero-content">
+      <div class="hero-tag">✨ Despacho rápido en Santiago</div>
+      <h1 class="hero-title">El sabor que <span>buscabas</span>,<br>directo a tu puerta</h1>
+      <p class="hero-subtitle">Chocolates, galletas y snacks de las mejores marcas nacionales e importadas. Pedidos simples con despacho a domicilio en toda la Región Metropolitana.</p>
+      <div class="hero-actions" style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;">
+        <a href="#productos" class="hero-cta" style="margin: 0;">Ver productos →</a>
+        <button onclick="openAllReviewsModal()" class="hero-cta" style="margin: 0; background: rgba(255,255,255,0.1); border: 1px solid #fff;">Ver valoraciones ⭐</button>
+      </div>
+    </div>
+    <div class="hero-emojis"><span>🍫</span><span>🍪</span><span>🍬</span></div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="trust-card"><span class="trust-icon">🚚</span><div><h4>Despacho a domicilio</h4><p>Entregamos de lunes a domingo en toda la RM. (Excepto festivos).</p></div></div>
+  <div class="trust-card"><span class="trust-icon">✅</span><div><h4>Productos originales</h4><p>Solo trabajamos con productos sellados y de calidad garantizada.</p></div></div>
+  <div class="trust-card"><span class="trust-icon">💳</span><div><h4>Pago flexible</h4><p>Transferencia, efectivo o Mercado Pago al recibir tu pedido.</p></div></div>
+  <div class="trust-card"><span class="trust-icon">📞</span><div><h4>Atención personalizada</h4><p>Escríbenos por WhatsApp y te respondemos de inmediato.</p></div></div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout" id="productos">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-card" style="border: 2px solid var(--brand-dark); background: var(--brand-light);">
+      <h3 style="color: var(--brand); border-bottom-color: var(--brand);">🎟️ Cupón Global</h3>
+      <div class="cart-coupon" style="margin-bottom: 0; padding-bottom: 0; border: none; flex-direction: column; gap: 0.6rem;">
+        <input type="text" id="globalCouponInput" placeholder="Código de descuento" style="background: #fff; width: 100%;" />
+        <button class="btn-coupon" onclick="applyGlobalCoupon()" style="background: var(--brand); width: 100%; padding: 0.6rem; font-size: 0.85rem;">Aplicar Cupón</button>
+      </div>
+      <p style="font-size: 0.65rem; color: var(--text-secondary); margin-top: 0.5rem;">Aplica a todos los productos del catálogo.</p>
+    </div>
+    <div class="sidebar-card">
+      <h3>Categorías</h3>
+      <div class="filter-list">
+        <label class="filter-item"><input type="radio" name="cat" checked onclick="filterCat('todos',null)"> Todos <span class="count">6</span></label>
+        <label class="filter-item"><input type="radio" name="cat" onclick="filterCat('chocolate',null)"> 🍫 Chocolates <span class="count">2</span></label>
+        <label class="filter-item"><input type="radio" name="cat" onclick="filterCat('galleta',null)"> 🍪 Galletas & Cookies <span class="count">2</span></label>
+        <label class="filter-item"><input type="radio" name="cat" onclick="filterCat('snack',null)"> 🧁 Snacks & Pasteles <span class="count">2</span></label>
+        <label class="filter-item"><input type="radio" name="cat" onclick="filterCat('importado',null)"> 🌎 Importados <span class="count">4</span></label>
+        <label class="filter-item"><input type="radio" name="cat" onclick="filterCat('local',null)"> 🇨🇱 Marcas Locales <span class="count">2</span></label>
+      </div>
+    </div>
+    <div class="sidebar-card">
+      <h3>Rango de Precio</h3>
+      <div class="price-range">
+        <input type="range" min="500" max="4000" value="4000" id="priceRange" oninput="updatePrice(this.value)" />
+        <div class="price-row"><span>$500</span><span id="priceVal">Hasta $4.000</span></div>
+        <button class="apply-filter" onclick="applyPriceFilter()">Aplicar filtro</button>
+      </div>
+    </div>
+    <div class="sidebar-card">
+      <h3>Valoración</h3>
+      <div class="filter-list">
+        <label class="filter-item"><input type="checkbox"> ⭐⭐⭐⭐⭐ 5 estrellas</label>
+        <label class="filter-item"><input type="checkbox"> ⭐⭐⭐⭐ 4+ estrellas</label>
+        <label class="filter-item"><input type="checkbox"> ⭐⭐⭐ 3+ estrellas</label>
+      </div>
+    </div>
+    <div class="policy-box">
+      <h3>📦 Política de Despacho</h3>
+      <p>Despachamos de lunes a domingo en la Región Metropolitana. <strong>No aceptamos pedidos en días festivos (estricto).</strong></p>
+      <button class="policy-link" onclick="openModal(event)">Ver horarios detallados →</button>
+    </div>
+    <div class="contact-card" id="contacto">
+      <h3>📞 Contáctanos</h3>
+      <div class="contact-row"><span>📱</span><a href="tel:+56959815468">+56 9 5981 5468</a></div>
+      <div class="contact-row"><span>📱</span><a href="tel:+56920609832">+56 9 2060 9832</a></div>
+      <div class="contact-row"><span>✉️</span><a href="mailto:dulcesdelivery0@gmail.com">dulcesdelivery0@gmail.com</a></div>
+      <div class="contact-row"><span>📍</span><span>Santiago, Chile</span></div>
+      <a href="https://wa.me/56959815468?text=Hola!%20Quiero%20hacer%20un%20pedido%20en%20DeleitExpress" target="_blank" class="whatsapp-btn">💬 Pedir por WhatsApp</a>
+    </div>
+  </aside>
+
+  <!-- PRODUCTS -->
+  <section>
+    <div class="section-header">
+      <h2>Nuestros <span>Productos</span></h2>
+      <div class="sort-bar">
+        <span class="results-count" id="resultsCount">6 productos</span>
+        <select id="sortSelect" onchange="applyFilters()">
+          <option value="default">Ordenar: Relevancia</option>
+          <option value="price-asc">Precio: menor a mayor</option>
+          <option value="price-desc">Precio: mayor a menor</option>
+          <option value="name">Nombre A–Z</option>
+        </select>
+      </div>
+    </div>
+    <div class="products-grid" id="productsGrid"></div>
+  </section>
+</div>
+
+<!-- DELIVERY INFO -->
+<div class="delivery-section">
+  <div class="delivery-grid">
+    <div class="delivery-card">
+      <span class="di">📦</span>
+      <div>
+        <h4>¿Cómo funciona el despacho?</h4>
+        <p>Coordina tu pedido por WhatsApp o correo, confirmamos disponibilidad y acordamos la fecha de entrega. Operamos de lunes a sábado en Santiago.</p>
+        <button class="inline-policy-link" onclick="openModal(event)">Ver política completa →</button>
+      </div>
+    </div>
+    <div class="delivery-card">
+      <span class="di">💰</span>
+      <div>
+        <h4>Medios de pago aceptados</h4>
+        <p>Aceptamos transferencia bancaria, efectivo al momento de la entrega y Mercado Pago mediante enlace. El pago se coordina con tu pedido de forma simple y segura.</p>
+      </div>
+    </div>
+    <div class="delivery-card">
+      <span class="di">🔄</span>
+      <div>
+        <h4>Cambios y devoluciones</h4>
+        <p>Si recibes un producto dañado o en mal estado, contáctanos dentro de las 24 horas posteriores a la entrega y buscamos la mejor solución para ti.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <div class="newsletter-inner">
+    <h2>¡Únete al Club Deleit! 🍬</h2>
+    <p>Suscríbete ahora y recibe un <strong>10% de descuento</strong> en tu primera compra. Sé el primero en enterarte de nuestras ofertas VIP y nuevos productos.</p>
+    <div class="newsletter-form">
+      <input type="email" placeholder="Tu mejor correo electrónico" id="newsletterEmail" />
+      <button onclick="subscribeNewsletter()">Obtener mi descuento</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <div class="logo" style="margin-bottom:.8rem;">
+        <div class="logo-icon" style="background:rgba(255,255,255,.1);">🍬</div>
+        <div class="logo-text">
+          <strong style="color:#fff;font-family:var(--font-display);font-size:1.15rem;display:block;">DeleitExpress</strong>
+          <span style="color:rgba(255,255,255,.5);font-size:.68rem;text-transform:uppercase;letter-spacing:.5px;">Dulces a domicilio</span>
+        </div>
+      </div>
+      <p style="font-size:.8rem;line-height:1.65;">Tu tienda de confianza para dulces y snacks importados y nacionales con despacho a domicilio en Santiago, Chile.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Información</h4>
+      <ul>
+        <li><a href="privacy-policy.html">Quiénes somos</a></li>
+        <li><a href="#">Cómo comprar</a></li>
+        <li><a href="#" onclick="openModal(event)">Política de despacho</a></li>
+        <li><a href="terms-of-service.html">Términos y condiciones</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Categorías</h4>
+      <ul>
+        <li><a href="#" onclick="filterCat('chocolate',null)">Chocolates</a></li>
+        <li><a href="#" onclick="filterCat('galleta',null)">Galletas & Cookies</a></li>
+        <li><a href="#" onclick="filterCat('snack',null)">Snacks & Pasteles</a></li>
+        <li><a href="#" onclick="filterCat('importado',null)">Importados</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="tel:+56959815468">+56 9 5981 5468</a></li>
+        <li><a href="tel:+56920609832">+56 9 2060 9832</a></li>
+        <li><a href="mailto:dulcesdelivery0@gmail.com">dulcesdelivery0@gmail.com</a></li>
+        <li><a href="https://wa.me/56959815468" target="_blank">WhatsApp</a></li>
+        <li><span style="color:rgba(255,255,255,.5)">Santiago, Chile</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 DeleitExpress — Todos los derechos reservados.</span>
+    <div class="footer-badges">
+      <span class="badge">🔒 Compra segura</span>
+      <span class="badge">🇨🇱 Santiago, Chile</span>
+      <span class="badge">✅ Productos originales</span>
+    </div>
+  </div>
+</footer>
+
+<!-- CART -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <h3>🛒 Mi Carrito</h3>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-body" id="cartBody">
+    <div class="cart-empty"><div class="ei">🛒</div><p>Tu carrito está vacío</p></div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-coupon">
+      <input type="text" id="couponInput" placeholder="Código de descuento" />
+      <button class="btn-coupon" onclick="applyCoupon()">Aplicar</button>
+    </div>
+    <div id="discountRow" style="display:none" class="cart-discount-row">
+      <span>Descuento aplicado</span>
+      <span id="discountVal">-$0</span>
+    </div>
+    <div class="cart-total"><span>Total estimado</span><span id="cartTotal">$0</span></div>
+    <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+      <button class="btn-checkout" onclick="checkout('+56959815468')">💬 Coordinar con +56 9 5981 5468</button>
+      <button class="btn-checkout" onclick="checkout('+56920609832')" style="background: #1a5fa8;">💬 Coordinar con +56 9 2060 9832</button>
+    </div>
+  </div>
+</div>
+
+<!-- POLICY MODAL -->
+<div class="modal-overlay" id="policyModal" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <div class="modal-head">
+      <h2>📦 Política de Despacho</h2>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+
+      <div class="modal-section">
+        <h3>🗓️ Días y horarios de despacho</h3>
+        <ul class="modal-list">
+          <li><strong>Lunes:</strong> 17:00 – 22:00 hrs.</li>
+          <li><strong>Martes:</strong> 16:00 – 22:00 hrs.</li>
+          <li><strong>Miércoles:</strong> 17:00 – 22:00 hrs.</li>
+          <li><strong>Jueves:</strong> 17:00 – 22:00 hrs.</li>
+          <li><strong>Viernes:</strong> 15:00 – 22:00 hrs.</li>
+          <li><strong>Sábado:</strong> 13:00 – 18:00 hrs.</li>
+          <li><strong>Domingo:</strong> 10:00 – 22:00 hrs.</li>
+          <li><strong>⚠️ Días Festivos:</strong> No se aceptan pedidos bajo ninguna circunstancia (Regla estricta).</li>
+        </ul>
+      </div>
+
+      <div class="modal-divider"></div>
+
+      <div class="modal-section">
+        <h3>📍 Cobertura de despacho</h3>
+        <ul class="modal-list">
+          <li>Despachamos a toda la <strong>Región Metropolitana de Santiago</strong>.</li>
+          <li>Para comunas alejadas del centro (Puente Alto, Maipú, San Bernardo, Quilicura, etc.) el tiempo y costo de entrega pueden variar.</li>
+          <li>Para pedidos fuera de la Región Metropolitana, consúltanos por WhatsApp antes de hacer tu pedido.</li>
+        </ul>
+      </div>
+
+      <div class="modal-divider"></div>
+
+      <div class="modal-section">
+        <h3>💵 Costo de despacho</h3>
+        <ul class="modal-list">
+          <li>El costo varía según la comuna de destino y se informa al coordinar el pedido.</li>
+          <li>Pedidos con un total superior a <strong>$15.000</strong> tienen despacho <strong>sin costo adicional</strong> en Santiago centro y comunas aledañas.</li>
+          <li>El monto exacto se confirma por WhatsApp antes de procesar tu pedido.</li>
+        </ul>
+      </div>
+
+      <div class="modal-divider"></div>
+
+      <div class="modal-section">
+        <h3>💳 Medios de pago</h3>
+        <ul class="modal-list">
+          <li><strong>Transferencia bancaria:</strong> al confirmar el pedido, previo al despacho.</li>
+          <li><strong>Efectivo:</strong> al momento de la entrega a domicilio.</li>
+          <li><strong>Mercado Pago:</strong> mediante enlace de pago enviado por WhatsApp.</li>
+        </ul>
+      </div>
+
+      <div class="modal-divider"></div>
+
+      <div class="modal-section">
+        <h3>🔄 Cambios y devoluciones</h3>
+        <ul class="modal-list">
+          <li>Si recibes un producto en mal estado o dañado, contáctanos dentro de las <strong>24 horas</strong> posteriores a la entrega.</li>
+          <li>Para gestionar un cambio, envíanos fotografía del producto por WhatsApp.</li>
+          <li>No se aceptan devoluciones de productos que hayan sido abiertos o consumidos parcialmente.</li>
+          <li>Los cambios están sujetos a disponibilidad de stock del producto.</li>
+        </ul>
+      </div>
+
+      <div class="modal-divider"></div>
+
+      <div class="modal-highlight">
+        ¿Tienes consultas sobre tu pedido? Escríbenos al <strong>+56 9 5981 5468</strong> o <strong>+56 9 2060 9832</strong>, o a <strong>dulcesdelivery0@gmail.com</strong> y te atendemos a la brevedad.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REVIEW MODAL -->
+<div class="modal-overlay" id="reviewModal" onclick="closeReviewModalOutside(event)">
+  <div class="modal" style="max-width: 450px;">
+    <div class="modal-head">
+      <h2 id="reviewModalTitle">Valorar Producto</h2>
+      <button class="modal-close" onclick="closeReviewModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <h3>¿Cuántas estrellas le das?</h3>
+        <div class="star-rating">
+          <input type="radio" name="stars" id="star5" value="5"><label for="star5">★</label>
+          <input type="radio" name="stars" id="star4" value="4"><label for="star4">★</label>
+          <input type="radio" name="stars" id="star3" value="3"><label for="star3">★</label>
+          <input type="radio" name="stars" id="star2" value="2"><label for="star2">★</label>
+          <input type="radio" name="stars" id="star1" value="1"><label for="star1">★</label>
+        </div>
+      </div>
+      <div class="modal-section">
+        <h3>Tus datos</h3>
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+          <input type="text" id="reviewFirstName" placeholder="Nombre" style="flex: 1; padding: 0.8rem; border: 1.5px solid var(--border); border-radius: var(--radius-sm); outline: none;" required />
+          <input type="text" id="reviewLastName" placeholder="Apellido" style="flex: 1; padding: 0.8rem; border: 1.5px solid var(--border); border-radius: var(--radius-sm); outline: none;" required />
+        </div>
+        <h3>Cuéntanos tu experiencia</h3>
+        <textarea class="review-textarea" id="reviewComment" placeholder="¿Qué tal te pareció el producto?"></textarea>
+      </div>
+      <button class="btn-submit-review" onclick="submitReview()">Enviar Valoración</button>
+    </div>
+  </div>
+</div>
+
+<!-- ALL REVIEWS MODAL -->
+<div class="modal-overlay" id="allReviewsModal" onclick="closeAllReviewsModalOutside(event)">
+  <div class="modal" style="max-width: 600px;">
+    <div class="modal-head">
+      <h2>⭐ Valoraciones de Clientes</h2>
+      <button class="modal-close" onclick="closeAllReviewsModal()">✕</button>
+    </div>
+    <div class="modal-body" id="allReviewsBody" style="max-height: 70vh; overflow-y: auto;">
+      <!-- Las reseñas se cargarán aquí -->
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+  /**
+   * NOTA SOBRE PRECIOS Y DESCUENTOS:
+   * Los precios base han sido ajustados según la última actualización.
+   * Los descuentos solo se activan en fechas festivas:
+   * - San Valentín (14 Feb): 10-15% en Combos en Pareja.
+   * - Pascua (Mar/Abr): 15% en 2da unidad de chocolates.
+   * - Día de la Madre (2do dom Mayo): 10% en reservas de queques.
+   * - Día del Niño (2do dom Ago): 20% en Pack Infantil.
+   * - Fiestas Patrias (18-19 Sep): 10% en queques familiares.
+   * - Halloween (31 Oct): 3x2 en formatos pequeños.
+   * - Navidad (Dic): 15% en Cajas de Regalo Navideñas.
+   */
+  const PRODUCTS = [
+    {
+      id: 1,
+      name: "Bon o Bon Cookies Original",
+      brand: "Arcor",
+      desc: "Galleta de base vainilla rellena con suave pasta de maní y cubierta con chocolate con leche. Pack de 95 g con 6 unidades individuales.",
+      weight: "95 g — 6 unidades",
+      price: 1590, oldPrice: null,
+      img: "Products Icons/Bon o Bon (Arcor).png",
+      cat: ["galleta","importado"], badge: null, badgeClass: "",
+      addedAt: "2026-05-15T10:00:00Z"
+    },
+    {
+      id: 2,
+      name: "Hershey's Milk Chocolate Bar",
+      brand: "Hershey's",
+      desc: "La barra de chocolate con leche más icónica del mundo. Elaborada con leche fresca y cacao selecto. Textura cremosa, sabor suave e inconfundible.",
+      weight: "453 g (1 libra)",
+      price: 1790, oldPrice: null,
+      img: "Products Icons/Hershey's Milk Chocolate Bar.png",
+      cat: ["chocolate","importado"], badge: null, badgeClass: "popular",
+      addedAt: "2026-05-14T10:00:00Z"
+    },
+    {
+      id: 3,
+      name: "M&M's Milk Chocolate",
+      brand: "Mars",
+      desc: "Los coloridos confites de chocolate con leche más reconocidos del mundo. Cubierta exterior de azúcar crujiente con centro de chocolate.",
+      weight: "141,8 g — bolsa resellable",
+      price: 1490, oldPrice: null,
+      img: "Products Icons/M&M's Milk Chocolate.png",
+      cat: ["chocolate","importado"], badge: null, badgeClass: "",
+      addedAt: "2026-05-10T10:00:00Z"
+    },
+    {
+      id: 4,
+      name: "Chips Ahoy! Original",
+      brand: "Nabisco",
+      desc: "La galleta con chispas de chocolate más vendida a nivel mundial. Textura crujiente y generosas chispas de chocolate real.",
+      weight: "40 g",
+      price: 2100, oldPrice: null,
+      img: "Products Icons/Chips Ahoy! Original.png",
+      cat: ["galleta","importado"], badge: null, badgeClass: "",
+      addedAt: "2026-05-15T21:00:00Z"
+    },
+    {
+      id: 5,
+      name: "Queque Sabor a Vainilla",
+      brand: "Cena",
+      desc: "Esponjoso queque de vainilla elaborado por Cena, marca chilena con décadas de tradición. Textura suave y sabor casero auténtico.",
+      weight: "Porción individual",
+      price: 3500, oldPrice: null,
+      img: "Products Icons/Cena Queque Sabor a Vainilla.png",
+      cat: ["snack","local"], badge: null, badgeClass: "local",
+      addedAt: "2026-05-01T10:00:00Z"
+    },
+    {
+      id: 6,
+      name: "Little Bites Brownie Mini Muffins",
+      brand: "Ideal",
+      desc: "Mini muffins de brownie elaborados con cacao real. Pack de 10 muffins en paquetes individuales para mayor frescura.",
+      weight: "130 g — 10 mini muffins",
+      price: 3190, oldPrice: null,
+      img: "Products Icons/Little Bites.png",
+      cat: ["snack","local"], badge: null, badgeClass: "",
+      addedAt: "2026-05-12T10:00:00Z"
+    },
+  ];
+
+  let cart = [];
+  let currentCat = 'todos';
+  let maxPrice = 4000;
+  let appliedCoupon = null;
+  let globalDiscount = null; // { code, factor }
+  let dynamicStats = {}; // { productId: { likes, rating, count } }
+  let topRatedProductId = null;
+  const VALID_COUPONS = {
+    'PRIMERACOMPRA': 0.10,
+    'DESPACHO': 0.10
+  };
+
+  async function fetchStats() {
+    try {
+      const response = await fetch('https://deleitexpress-backend.jhonnyoficial2.workers.dev/stats');
+      const data = await response.json();
+      
+      let maxReviews = -1;
+      data.forEach(item => {
+        dynamicStats[item.product_id] = {
+          likes: item.likes_count || 0,
+          rating: item.reviews_count ? (item.rating_sum / item.reviews_count).toFixed(1) : 0,
+          count: item.reviews_count || 0
+        };
+        if (item.reviews_count > maxReviews && item.reviews_count > 0) {
+          maxReviews = item.reviews_count;
+          topRatedProductId = item.product_id;
+        }
+      });
+      applyFilters();
+    } catch (err) { console.error('Error fetching stats:', err); }
+  }
+
+  function applyGlobalCoupon() { /* ... */ }
+
+  function fmt(n) { return '$' + n.toLocaleString('es-CL'); }
+
+  function renderProducts(list) {
+    const grid = document.getElementById('productsGrid');
+    document.getElementById('resultsCount').textContent = `${list.length} producto${list.length!==1?'s':''}`;
+    if (!list.length) {
+      grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-muted)"><div style="font-size:3rem">🔍</div><p style="margin-top:.6rem">No se encontraron productos con ese criterio.</p></div>`;
+      return;
+    }
+    grid.innerHTML = list.map(p => {
+      const stats = dynamicStats[p.id] || { likes: 0, rating: 0, count: 0 };
+      const starsFull = '★'.repeat(Math.floor(stats.rating));
+      const starsEmpty = '☆'.repeat(5 - Math.floor(stats.rating));
+      
+      // Lógica de Etiquetas Temporales
+      const now = new Date();
+      const added = new Date(p.addedAt);
+      const diffHrs = (now - added) / (1000 * 60 * 60);
+      
+      let timeTag = "";
+      if (diffHrs <= 24) {
+        timeTag = `<span class="product-tag tag-recent">EL MAS RECIENTE</span>`;
+      } else if (diffHrs <= 168) { // 7 días para "NUEVO"
+        timeTag = `<span class="product-tag tag-new">NUEVO</span>`;
+      }
+      
+      // Etiqueta El Más Valorado
+      const topTag = (p.id === topRatedProductId) ? `<span class="product-tag tag-top">EL MAS VALORADO</span>` : "";
+
+      let finalPrice = p.price;
+      let priceHtml = `<span class="product-price">${fmt(p.price)}</span>`;
+      
+      if (globalDiscount) {
+        const discount = Math.round(p.price * globalDiscount.factor);
+        finalPrice = p.price - discount;
+        priceHtml = `
+          <span class="product-price-old" style="color: #e8252a; text-decoration: line-through; font-size: 0.9rem; font-weight: 700;">${fmt(p.price)}</span>
+          <span class="product-price">${fmt(finalPrice)}</span>
+          <span class="product-discount" style="background: #fff1f1; color: #e8252a; border: 1px solid #e8252a;">-${globalDiscount.factor * 100}%</span>
+        `;
+      }
+
+      return `
+      <div class="product-card">
+        ${timeTag}
+        ${globalDiscount ? `<span class="product-badge" style="background: #e8252a;">OFERTA GLOBAL</span>` : (p.badge ? `<span class="product-badge ${p.badgeClass}">${p.badge}</span>` : '')}
+        <button class="product-wishlist" onclick="toggleLike(${p.id}, this)" title="Me gusta">🤍</button>
+        <div class="product-img-wrap">
+          <img src="${p.img}" alt="${p.name}" loading="lazy"
+            onerror="this.parentElement.innerHTML='<div style=\'font-size:4rem;opacity:.25\'>🍬</div>'" />
+        </div>
+        <div class="product-info">
+          <span class="product-brand">${p.brand}</span>
+          <div class="product-name">${p.name} ${topTag}</div>
+          <div class="product-desc">${p.desc}</div>
+          <div class="product-weight">📦 ${p.weight}</div>
+          <div class="product-stats">
+            <span class="stars" style="color:var(--gold)">${starsFull}${starsEmpty}</span>
+            <span style="font-weight:700">${stats.rating || '0.0'}</span>
+            <span class="rating-count">(${stats.count} opiniones)</span>
+            <span class="likes-count">❤️ ${stats.likes} Me gustas</span>
+            <button class="btn-review-open" onclick="openReviewModal(${p.id}, '${p.name}')">Valorar</button>
+          </div>
+          <div class="product-price-row">
+            ${priceHtml}
+          </div>
+        </div>
+        <div class="product-actions">
+          <button class="btn-add-cart" onclick="addToCart(${p.id}, ${finalPrice})">🛒 Añadir</button>
+          <button class="btn-buy-now" onclick="buyNow(${p.id}, ${finalPrice})">Comprar</button>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function filterCat(cat, el) {
+    currentCat = cat;
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    if (el) el.classList.add('active');
+    applyFilters();
+  }
+
+  function applyFilters() {
+    let list = [...PRODUCTS];
+    if (currentCat !== 'todos') list = list.filter(p => p.cat.includes(currentCat));
+    list = list.filter(p => p.price <= maxPrice);
+    const s = document.getElementById('sortSelect').value;
+    if (s === 'price-asc')  list.sort((a,b) => a.price-b.price);
+    if (s === 'price-desc') list.sort((a,b) => b.price-a.price);
+    if (s === 'name')       list.sort((a,b) => a.name.localeCompare(b.name));
+    renderProducts(list);
+  }
+
+  function updatePrice(v) { maxPrice=+v; document.getElementById('priceVal').textContent='Hasta '+fmt(maxPrice); }
+  function applyPriceFilter() { applyFilters(); showToast('🔍 Filtro aplicado','#1a5fa8'); }
+
+  function filterProducts() {
+    const q = document.getElementById('searchInput').value.toLowerCase().trim();
+    if (!q) { applyFilters(); return; }
+    renderProducts(PRODUCTS.filter(p =>
+      p.name.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q)
+    ));
+  }
+  document.getElementById('searchInput').addEventListener('keyup', e => { if(e.key==='Enter') filterProducts(); });
+
+  function addToCart(id, currentPrice) {
+    const p = PRODUCTS.find(x=>x.id===id);
+    const priceToUse = currentPrice || p.price;
+    const ex = cart.find(x=>x.id===id && x.appliedPrice === priceToUse);
+    
+    if (ex) {
+      ex.qty++;
+    } else {
+      cart.push({...p, price: priceToUse, appliedPrice: priceToUse, qty:1});
+    }
+    updateCartBadge(); renderCartBody();
+    showToast('✅ ¡Añadido al carrito!');
+  }
+  function removeFromCart(id) { cart=cart.filter(x=>x.id!==id); updateCartBadge(); renderCartBody(); }
+  function changeQty(id,d) {
+    const item=cart.find(x=>x.id===id); if(!item) return;
+    item.qty+=d; if(item.qty<=0){removeFromCart(id);return;}
+    updateCartBadge(); renderCartBody();
+  }
+  function updateCartBadge() { document.getElementById('cartBadge').textContent=cart.reduce((s,i)=>s+i.qty,0); }
+  
+  function applyCoupon() {
+    const input = document.getElementById('couponInput');
+    const code = input.value.trim().toUpperCase();
+    
+    if (appliedCoupon) {
+      showToast('⚠️ Ya has aplicado un código para este pedido', '#FF8C00');
+      return;
+    }
+    
+    if (VALID_COUPONS[code]) {
+      appliedCoupon = { code: code, discount: VALID_COUPONS[code] };
+      renderCartBody();
+      showToast('✅ ¡Cupón aplicado correctamente!', '#1a7f4b');
+      input.value = '';
+    } else {
+      showToast('❌ Código no válido', '#e8252a');
+    }
+  }
+
+  function renderCartBody() {
+    const body=document.getElementById('cartBody'), footer=document.getElementById('cartFooter');
+    if(!cart.length){
+      body.innerHTML=`<div class="cart-empty"><div class="ei">🛒</div><p>Tu carrito está vacío</p></div>`;
+      footer.style.display='none'; appliedCoupon = null; return;
+    }
+    footer.style.display='block';
+    body.innerHTML=cart.map(i=>`
+      <div class="cart-item">
+        <img src="${i.img}" alt="${i.name}" onerror="this.style.display='none'"/>
+        <div class="cart-item-info">
+          <div class="cart-item-name">${i.name}</div>
+          <div class="cart-item-price">${fmt(i.price*i.qty)}</div>
+          <div class="cart-item-qty">
+            <button class="qty-btn" onclick="changeQty(${i.id},-1)">−</button>
+            <span class="qty-val">${i.qty}</span>
+            <button class="qty-btn" onclick="changeQty(${i.id},1)">+</button>
+          </div>
+        </div>
+        <button class="cart-remove" onclick="removeFromCart(${i.id})">✕ Eliminar</button>
+      </div>`).join('');
+    
+    const subtotal = cart.reduce((s,i)=>s+i.price*i.qty,0);
+    let total = subtotal;
+    const discRow = document.getElementById('discountRow');
+    const discVal = document.getElementById('discountVal');
+    
+    if (appliedCoupon) {
+      const discount = Math.round(subtotal * appliedCoupon.discount);
+      total = subtotal - discount;
+      discRow.style.display = 'flex';
+      discVal.textContent = `-${fmt(discount)} (${appliedCoupon.code})`;
+    } else {
+      discRow.style.display = 'none';
+    }
+    
+    document.getElementById('cartTotal').textContent=fmt(total);
+  }
+  function openCart(e){e&&e.preventDefault();document.getElementById('cartDrawer').classList.add('open');document.getElementById('cartOverlay').classList.add('open');}
+  function closeCart(){document.getElementById('cartDrawer').classList.remove('open');document.getElementById('cartOverlay').classList.remove('open');}
+  function buyNow(id, currentPrice){addToCart(id, currentPrice);openCart();}
+  function checkout(phone){
+    if(!cart.length) return;
+    const subtotal = cart.reduce((s,i)=>s+i.price*i.qty,0);
+    let total = subtotal;
+    let couponMsg = '';
+    
+    if (appliedCoupon) {
+      const discount = Math.round(subtotal * appliedCoupon.discount);
+      total = subtotal - discount;
+      couponMsg = `%0A%0ACupón aplicado: ${appliedCoupon.code} (-${fmt(discount)})`;
+    }
+
+    const lines=cart.map(i=>`• ${i.name} x${i.qty} = ${fmt(i.price*i.qty)}`).join('%0A');
+    const msg=`Hola! Quiero hacer un pedido en DeleitExpress:%0A%0A${lines}${couponMsg}%0A%0ATotal estimado: ${fmt(total)}%0A%0APor favor confírmame disponibilidad y coordinar el despacho. ¡Muchas gracias!`;
+    window.open(`https://wa.me/${phone.replace(/\s/g,'')}?text=${msg}`,'_blank');
+  }
+  function toggleWish(btn){btn.textContent=btn.textContent==='🤍'?'❤️':'🤍';}
+  function showToast(msg,bg){
+    const t=document.getElementById('toast'); t.textContent=msg; t.style.background=bg||'#1a7f4b';
+    t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2400);
+  }
+  function openModal(e){e&&e.preventDefault();document.getElementById('policyModal').classList.add('open');document.body.style.overflow='hidden';}
+  function closeModal(){document.getElementById('policyModal').classList.remove('open');document.body.style.overflow='';}
+  function closeModalOutside(e){if(e.target===document.getElementById('policyModal'))closeModal();}
+
+  let activeReviewProductId = null;
+  function openReviewModal(id, name) {
+    activeReviewProductId = id;
+    document.getElementById('reviewModalTitle').textContent = `Valorar ${name}`;
+    document.getElementById('reviewModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeReviewModal() {
+    document.getElementById('reviewModal').classList.remove('open');
+    document.body.style.overflow = '';
+    document.getElementById('reviewComment').value = '';
+    document.querySelectorAll('input[name="stars"]').forEach(i => i.checked = false);
+  }
+  function closeReviewModalOutside(e) { if(e.target === document.getElementById('reviewModal')) closeReviewModal(); }
+
+  async function submitReview() {
+    const ratingInput = document.querySelector('input[name="stars"]:checked');
+    const comment = document.getElementById('reviewComment').value.trim();
+    const firstName = document.getElementById('reviewFirstName').value.trim();
+    const lastName = document.getElementById('reviewLastName').value.trim();
+
+    if (!ratingInput) { showToast('⚠️ Por favor selecciona las estrellas', '#FF8C00'); return; }
+    if (!firstName || !lastName) { showToast('⚠️ Por favor ingresa tu nombre y apellido', '#FF8C00'); return; }
+    
+    const rating = parseInt(ratingInput.value);
+    const btn = document.querySelector('.btn-submit-review');
+    btn.disabled = true; btn.textContent = 'Enviando...';
+
+    try {
+      const response = await fetch('https://deleitexpress-backend.jhonnyoficial2.workers.dev/review', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId: activeReviewProductId, rating, comment, firstName, lastName })
+      });
+      if (response.ok) {
+        showToast('✅ ¡Gracias por tu valoración!', '#1a7f4b');
+        closeReviewModal();
+        fetchStats(); // Recargar estadísticas
+      }
+    } catch (err) { console.error('Error submitting review:', err); }
+    finally { btn.disabled = false; btn.textContent = 'Enviar Valoración'; }
+  }
+
+  async function openAllReviewsModal() {
+    const body = document.getElementById('allReviewsBody');
+    body.innerHTML = '<div style="text-align:center;padding:2rem;">Cargando valoraciones...</div>';
+    document.getElementById('allReviewsModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    try {
+      const response = await fetch('https://deleitexpress-backend.jhonnyoficial2.workers.dev/all-reviews');
+      const reviews = await response.json();
+
+      if (reviews.length === 0) {
+        body.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--text-muted);">Aún no hay valoraciones. ¡Sé el primero!</div>';
+        return;
+      }
+
+      body.innerHTML = reviews.map(r => {
+        const product = PRODUCTS.find(p => p.id === r.product_id) || { name: 'Producto' };
+        const stats = dynamicStats[r.product_id] || { likes: 0 };
+        return `
+          <div style="padding: 1.2rem; border-bottom: 1px solid var(--border); margin-bottom: 0.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+              <div>
+                <strong style="display: block; font-size: 1.1rem; color: var(--brand);">${product.name}</strong>
+                <span style="font-size: 0.85rem; font-weight: 700;">${r.first_name} ${r.last_name}</span>
+              </div>
+              <div style="text-align: right;">
+                <div style="color: var(--gold); font-size: 1.1rem;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</div>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">❤️ ${stats.likes} Likes</span>
+              </div>
+            </div>
+            <p style="font-size: 0.95rem; line-height: 1.5; color: var(--text-primary); font-style: italic;">"${r.comment || 'Sin comentario.'}"</p>
+            <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.5rem;">Publicado el: ${new Date(r.created_at).toLocaleDateString()}</div>
+          </div>
+        `;
+      }).join('');
+
+    } catch (err) {
+      body.innerHTML = '<div style="text-align:center;padding:2rem;color:#e8252a;">Error al cargar las valoraciones.</div>';
+    }
+  }
+
+  function closeAllReviewsModal() {
+    document.getElementById('allReviewsModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closeAllReviewsModalOutside(e) { if(e.target === document.getElementById('allReviewsModal')) closeAllReviewsModal(); }
+
+  async function toggleLike(id, btn) {
+    try {
+      const response = await fetch('https://deleitexpress-backend.jhonnyoficial2.workers.dev/like', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId: id })
+      });
+      if (response.ok) {
+        btn.textContent = '❤️';
+        showToast('💖 ¡Te gusta este producto!', '#e8252a');
+        fetchStats();
+      }
+    } catch (err) { console.error('Error liking product:', err); }
+  }
+
+  async function subscribeNewsletter() {
+     const emailInput = document.getElementById('newsletterEmail');
+     const email = emailInput.value.trim();
+     
+     if (!email || !email.includes('@')) {
+       showToast('❌ Por favor, ingresa un correo válido', '#e8252a');
+       return;
+     }
+ 
+     // Mostrar estado de carga
+     const btn = document.querySelector('.newsletter-form button');
+     const originalText = btn.textContent;
+     btn.textContent = 'Enviando...';
+     btn.disabled = true;
+
+     try {
+       // URL de tu Worker de Cloudflare
+        const WORKER_URL = 'https://deleitexpress-backend.jhonnyoficial2.workers.dev/subscribe';
+       
+       const response = await fetch(WORKER_URL, {
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify({ email: email })
+       });
+
+       const result = await response.json();
+
+       if (response.ok) {
+         showToast('📧 ¡Te has suscrito y enviado tu cupón!', '#2d1b69');
+         emailInput.value = '';
+         localStorage.setItem('deleit_subscribed', 'true');
+       } else if (result.error === 'already_subscribed') {
+         showToast('ℹ️ Este correo ya está suscrito al Club', '#FF8C00');
+         emailInput.value = '';
+       } else {
+         throw new Error(result.message || 'Error en el servidor');
+       }
+     } catch (err) {
+       console.error('Error al suscribir:', err);
+       // Fallback a localStorage si el Worker falla o no está configurado aún
+       let subscribers = JSON.parse(localStorage.getItem('deleit_subscribers') || '[]');
+       if (!subscribers.includes(email)) {
+         subscribers.push(email);
+         localStorage.setItem('deleit_subscribers', JSON.stringify(subscribers));
+       }
+       showToast('📧 ¡Suscrito! (Guardado localmente)', '#2d1b69');
+       emailInput.value = '';
+     } finally {
+       btn.textContent = originalText;
+       btn.disabled = false;
+     }
+   }
+
+  // Lógica de Fechas Festivas y Notificaciones
+  const FESTIVE_DATES = [
+    { name: 'San Valentín', day: 14, month: 1, discount: '15%' }, // Meses 0-11
+    { name: 'Día de la Madre', day: 11, month: 4, discount: '10%' }, // Aprox 2do domingo Mayo
+    { name: 'Día del Niño', day: 10, month: 7, discount: '20%' }, // Aprox 2do domingo Agosto
+    { name: 'Fiestas Patrias', day: 18, month: 8, discount: '10%' },
+    { name: 'Halloween', day: 31, month: 9, discount: '3x2' },
+    { name: 'Navidad', day: 25, month: 11, discount: '15%' }
+  ];
+
+  function checkFestiveSeason() {
+    const today = new Date();
+    const currentDay = today.getDate();
+    const currentMonth = today.getMonth();
+
+    const festive = FESTIVE_DATES.find(f => f.day === currentDay && f.month === currentMonth);
+    
+    if (festive) {
+      showToast(`🎉 ¡Feliz ${festive.name}! Aprovecha un ${festive.discount} de descuento`, '#E8252A');
+      const heroTitle = document.querySelector('.hero-title span');
+      if (heroTitle) heroTitle.textContent = `¡Oferta ${festive.name}!`;
+    }
+  }
+
+  // Función Administrativa para notificar nuevos productos
+  async function notifySubscribersOfNewProducts() {
+    const newProducts = PRODUCTS.filter(p => {
+      const diffHrs = (new Date() - new Date(p.addedAt)) / (1000 * 60 * 60);
+      return diffHrs <= 24; // Solo los "EL MAS RECIENTE"
+    }).map(p => p.name);
+
+    if (newProducts.length === 0) {
+      console.log("No hay productos recientes (menos de 24h) para notificar.");
+      return;
+    }
+
+    if (!confirm(`¿Enviar notificación por correo a todos los suscriptores sobre estos productos?:\n${newProducts.join(", ")}`)) return;
+
+    try {
+      const response = await fetch('https://deleitexpress-backend.jhonnyoficial2.workers.dev/broadcast-new', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ products: newProducts })
+      });
+      if (response.ok) {
+        const res = await response.json();
+        alert(`✅ Éxito: Se notificó a ${res.count} suscriptores.`);
+      }
+    } catch (err) { console.error('Error enviando broadcast:', err); }
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    fetchStats();
+    checkFestiveSeason();
+  });
+</script>
+</body>
+</html>

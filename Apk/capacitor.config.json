@@ -1,0 +1,9 @@
+{
+  "appId": "com.deleite.express",
+  "appName": "DeleitExpress",
+  "webDir": "www",
+  "server": {
+    "url": "https://pages.dev",
+    "cleartext": true
+  }
+}

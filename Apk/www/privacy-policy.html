@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sobre Nosotros — DeleitExpress</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg: #0b0e13; --surface: #111622; --border: #1e2736; --border2: #263247; --accent: #00c9ff; --accent2: #3dffa0; --accent3: #ff5f87; --text: #c8d6e8; --muted: #627490; --heading: #eaf2ff; --mono: 'Space Mono', monospace; --sans: 'DM Sans', sans-serif; --display: 'Syne', sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 15px; line-height: 1.8; min-height: 100vh; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 40px 40px; opacity: .35; pointer-events: none; z-index: 0; }
+    body::after { content: ''; position: fixed; top: -200px; left: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,201,255,.07) 0%, transparent 70%); pointer-events: none; z-index: 0; }
+    header { position: relative; z-index: 10; background: rgba(11,14,19,.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 2rem; }
+    .header-inner { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo { display: flex; align-items: center; gap: .75rem; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--accent2), var(--accent)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    .logo-text { font-family: var(--display); font-weight: 800; font-size: .9rem; color: var(--heading); }
+    .logo-text span { color: var(--accent2); }
+    .pill-link { font-family: var(--mono); font-size: .65rem; color: var(--muted); text-decoration: none; border: 1px solid var(--border2); padding: .3rem .8rem; border-radius: 20px; transition: color .2s, border-color .2s; }
+    .pill-link:hover { color: var(--accent2); border-color: var(--accent2); }
+    .pill-link.active { color: var(--accent); border-color: var(--accent); background: rgba(0,201,255,.06); }
+    .hero { position: relative; z-index: 1; max-width: 1000px; margin: 0 auto; padding: 5rem 2rem 3.5rem; }
+    .doc-tag { display: inline-flex; align-items: center; gap: .5rem; font-family: var(--mono); font-size: .65rem; color: var(--accent); border: 1px solid rgba(0,201,255,.3); background: rgba(0,201,255,.06); padding: .35rem .85rem; border-radius: 20px; letter-spacing: .08em; margin-bottom: 1.5rem; }
+    .doc-tag::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .4; transform: scale(.7); } }
+    h1 { font-family: var(--display); font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 800; color: var(--heading); line-height: 1.1; letter-spacing: -.02em; margin-bottom: 1rem; }
+    h1 em { font-style: normal; background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1.75rem; padding-top: 1.75rem; border-top: 1px solid var(--border); }
+    .meta-item { display: flex; flex-direction: column; gap: .2rem; }
+    .meta-label { font-family: var(--mono); font-size: .6rem; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+    .meta-value { font-family: var(--mono); font-size: .78rem; color: var(--heading); }
+    .layout { position: relative; z-index: 1; max-width: 1000px; margin: 0 auto; padding: 0 2rem 6rem; display: grid; grid-template-columns: 220px 1fr; gap: 3rem; align-items: start; }
+    .toc { position: sticky; top: 2rem; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); overflow: hidden; }
+    .toc-header { padding: .85rem 1.2rem; font-family: var(--mono); font-size: .6rem; letter-spacing: .1em; color: var(--muted); border-bottom: 1px solid var(--border); text-transform: uppercase; }
+    .toc-list { list-style: none; padding: .6rem 0; }
+    .toc-list li a { display: flex; align-items: center; gap: .65rem; padding: .5rem 1.2rem; font-size: .75rem; color: var(--muted); text-decoration: none; transition: color .2s, background .2s; border-left: 2px solid transparent; }
+    .toc-list li a:hover { color: var(--accent); background: rgba(0,201,255,.04); border-left-color: var(--accent); }
+    .toc-num { font-family: var(--mono); font-size: .6rem; color: var(--border2); width: 16px; flex-shrink: 0; }
+    .content { display: flex; flex-direction: column; gap: 2.5rem; }
+    .section { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: border-color .3s; }
+    .section:hover { border-color: var(--border2); }
+    .section-head { display: flex; align-items: center; gap: 1rem; padding: 1.4rem 1.8rem; border-bottom: 1px solid var(--border); }
+    .section-num { font-family: var(--mono); font-size: .65rem; color: var(--accent); background: rgba(0,201,255,.1); border: 1px solid rgba(0,201,255,.2); padding: .25rem .6rem; border-radius: 4px; flex-shrink: 0; }
+    h2 { font-family: var(--display); font-size: 1rem; font-weight: 700; color: var(--heading); }
+    .section-body { padding: 1.6rem 1.8rem; display: flex; flex-direction: column; gap: 1rem; }
+    p { color: var(--text); font-weight: 300; }
+    ul, ol { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+    ul li, ol li { display: flex; gap: .8rem; align-items: flex-start; color: var(--text); font-weight: 300; }
+    ul li::before { content: '▸'; color: var(--accent); flex-shrink: 0; margin-top: .05em; font-size: .8em; }
+    ol { counter-reset: ol-counter; }
+    ol li { counter-increment: ol-counter; }
+    ol li::before { content: counter(ol-counter, decimal-leading-zero); font-family: var(--mono); font-size: .65rem; color: var(--accent); flex-shrink: 0; margin-top: .2em; background: rgba(0,201,255,.08); border: 1px solid rgba(0,201,255,.15); border-radius: 3px; padding: .1rem .35rem; line-height: 1.6; }
+    .callout { border-left: 3px solid var(--accent2); background: rgba(61,255,160,.05); padding: 1rem 1.2rem; border-radius: 0 8px 8px 0; font-size: .875rem; }
+    .callout.warn { border-left-color: var(--accent3); background: rgba(255,95,135,.05); }
+    .callout.info { border-left-color: var(--accent); background: rgba(0,201,255,.05); }
+    code { font-family: var(--mono); font-size: .78em; background: rgba(255,255,255,.05); border: 1px solid var(--border2); padding: .1em .45em; border-radius: 4px; color: var(--accent); }
+    strong { font-weight: 500; color: var(--heading); }
+    footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 2rem; text-align: center; }
+    .footer-inner { max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: .75rem; }
+    .footer-logo { font-family: var(--display); font-weight: 800; font-size: 1rem; color: var(--muted); }
+    .footer-logo span { color: var(--accent2); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-family: var(--mono); font-size: .65rem; color: var(--muted); text-decoration: none; letter-spacing: .05em; transition: color .2s; }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy { font-family: var(--mono); font-size: .6rem; color: var(--border2); letter-spacing: .05em; }
+    @media (max-width: 700px) { .layout { grid-template-columns: 1fr; } .toc { position: static; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="index.html">
+      <div class="logo-icon">🍰</div>
+      <div class="logo-text"><span>Deleit</span> Express</div>
+    </a>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+      <a class="pill-link" href="index.html">Inicio</a>
+      <a class="pill-link active" href="privacy-policy.html">Sobre Nosotros</a>
+      <a class="pill-link" href="terms-of-service.html">T&C</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="doc-tag">SOBRE NOSOTROS · DELEITEXPRESS</div>
+  <h1>Conoce a <em>DeleitExpress</em></h1>
+  <p style="font-size:.95rem;max-width:600px;color:var(--muted);">
+    Somos un emprendimiento juvenil dedicado a llevar los mejores dulces y snacks a tu puerta. Con pasión por la calidad y la excelencia en el servicio, transformamos cada entrega en una experiencia memorable.
+  </p>
+  <div class="hero-meta">
+    <div class="meta-item"><span class="meta-label">Fundación</span><span class="meta-value">2025 — Santiago, Chile</span></div>
+    <div class="meta-item"><span class="meta-label">Equipo</span><span class="meta-value">3 Emprendedores</span></div>
+    <div class="meta-item"><span class="meta-label">Cobertura</span><span class="meta-value">Región Metropolitana</span></div>
+    <div class="meta-item"><span class="meta-label">Misión</span><span class="meta-value">Calidad & Rapidez</span></div>
+  </div>
+</section>
+
+<div class="layout">
+  <aside class="toc">
+    <div class="toc-header">Índice</div>
+    <ul class="toc-list">
+      <li><a href="#p1"><span class="toc-num">01</span> Nuestra Historia</a></li>
+      <li><a href="#p2"><span class="toc-num">02</span> Compromiso</a></li>
+      <li><a href="#p3"><span class="toc-num">03</span> Ubicación</a></li>
+      <li><a href="#p4"><span class="toc-num">04</span> Despachos</a></li>
+      <li><a href="#p5"><span class="toc-num">05</span> Garantía</a></li>
+    </ul>
+  </aside>
+
+  <main class="content">
+    <div class="section" id="p1">
+      <div class="section-head"><span class="section-num">§ 01</span><h2>Nuestra Historia</h2></div>
+      <div class="section-body">
+        <p>¡Hola! Somos un equipo de <strong>3 adolescentes</strong> con una visión clara: emprender y llevar la mejor experiencia de dulces y snacks a cada rincón de Santiago. Lo que comenzó como una idea entre amigos apasionados por los negocios, hoy se convierte en <strong>DeleitExpress</strong>.</p>
+        <p>Creemos que cada antojo merece ser satisfecho con calidad, rapidez y una sonrisa. Nuestro objetivo es simple pero poderoso: cambiar la forma en que disfrutas tus dulces favoritos, llevándolos directamente a tu hogar con el mejor servicio posible.</p>
+        <div class="callout info"><strong>Filosofía:</strong> En DeleitExpress, no solo vendemos productos — construimos relaciones. Cada cliente es importante, y nos comprometemos a excelencia en calidad y atención personalizada en cada pedido que realizamos.</div>
+      </div>
+    </div>
+
+    <div class="section" id="p2">
+      <div class="section-head"><span class="section-num">§ 02</span><h2>Nuestro Compromiso con la Calidad</h2></div>
+      <div class="section-body">
+        <p>En DeleitExpress, la calidad no es negociable. Trabajamos exclusivamente con marcas líderes, tanto nacionales como importadas, asegurando que cada producto llegue sellado y en perfectas condiciones a tu hogar.</p>
+        <p>Sabemos que confías en nosotros, y por eso nuestra regla de oro es simple:</p>
+        <ul>
+          <li><strong>Selección rigurosa:</strong> Cada producto es cuidadosamente elegido para garantizar frescura y sabor</li>
+          <li><strong>Responsabilidad total:</strong> Si algo falla en nuestros productos, nos hacemos cargo de inmediato</li>
+          <li><strong>Atención personalizada:</strong> Tu satisfacción es nuestra prioridad número uno</li>
+          <li><strong>Transparencia:</strong> Siempre honesto en precios, promociones y términos de servicio</li>
+        </ul>
+        <div class="callout">Si recibes un producto dañado, vencido o incorrecto, cuéntanos dentro de 24 horas y lo resolvemos sin preguntas.</div>
+      </div>
+    </div>
+
+    <div class="section" id="p3">
+      <div class="section-head"><span class="section-num">§ 03</span><h2>¿Dónde Encontrarnos?</h2></div>
+      <div class="section-body">
+        <p>Aunque operamos principalmente con despacho a domicilio para tu comodidad, nuestra base de operaciones se encuentra en:</p>
+        <p style="font-size: 1.1rem; font-weight: 600; color: var(--accent2);">📍 Sanchez 15, San Bernardo, Región Metropolitana</p>
+        <p>Si prefieres retirar tus productos personalmente o necesitas gestionar una devolución, puedes acercarte a nuestra ubicación previa coordinación por WhatsApp.</p>
+        <div class="callout info"><strong>Conecta con nosotros:</strong> ¡Síguenos en redes sociales para conocer promociones exclusivas, nuevos productos y actualizaciones sobre DeleitExpress!</div>
+      </div>
+    </div>
+
+    <div class="section" id="p4">
+      <div class="section-head"><span class="section-num">§ 04</span><h2>Despachos y Entregas</h2></div>
+      <div class="section-body">
+        <p>Nos esforzamos por ofrecerte la mejor experiencia de compra y entrega:</p>
+        <ul>
+          <li><strong>Área de cobertura:</strong> Operamos de lunes a domingo en la Región Metropolitana</li>
+          <li><strong>Días festivos:</strong> No realizamos despachos en días festivos de forma estricta</li>
+          <li><strong>Tiempos estimados:</strong> Se confirman vía WhatsApp al momento de coordinar el despacho</li>
+          <li><strong>Entrega garantizada:</strong> Tus productos llegarán en las mejores condiciones posibles</li>
+        </ul>
+        <div class="callout warn">Los tiempos de entrega son estimados. En caso de retrasos inesperados, nos comunicaremos contigo de inmediato.</div>
+      </div>
+    </div>
+
+    <div class="section" id="p5">
+      <div class="section-head"><span class="section-num">§ 05</span><h2>Garantía y Devoluciones</h2></div>
+      <div class="section-body">
+        <p>Nos hacemos responsables por la calidad de nuestros productos. Si recibes algo que no cumple con nuestros estándares:</p>
+        <ol>
+          <li>Debes notificarnos dentro de las <strong>24 horas posteriores</strong> a la recepción</li>
+          <li>Se requerirá una fotografía del estado del producto</li>
+          <li>Gestionaremos el retiro del producto fallado y la entrega de uno nuevo sin costo adicional</li>
+        </ol>
+        <div class="callout info"><strong>Política clara:</strong> Tu dinero está seguro. Si no estás satisfecho, nos encargamos de solucionarlo rápidamente.</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">🍰 <span>Deleit</span> Express</div>
+    <div class="footer-links">
+      <a href="index.html">Inicio</a>
+      <a href="privacy-policy.html">Sobre Nosotros</a>
+      <a href="terms-of-service.html">Términos y Condiciones</a>
+    </div>
+    <div class="footer-copy">© 2025 DeleitExpress — Todos los derechos reservados. Emprendimiento Juvenil Chileno.</div>
+  </div>
+</footer>
+
+</body>
+</html>
